@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tkstone-springboot-frontend-replica-deployment
+  labels:
+    app: tkstone-springboot-frontend-replica
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tkstone-springboot-frontend
+  template:
+    metadata:
+      labels:
+        app: tkstone-springboot-frontend
+    spec:
+#      serviceAccountName: spring-boot-admin-sa
+      automountServiceAccountToken: false
+      containers:
+      - name: stone-springboot-frontend
+        image: tkstone.springboot.frontend:20210129
+        ports:
+        - containerPort: 7070
+
+
